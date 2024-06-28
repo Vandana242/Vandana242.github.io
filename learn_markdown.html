@@ -1,1 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pandas Notes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h1, h2, h3 {
+            color: #333;
+        }
+        pre {
+            background-color: #e8e8e8;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        code {
+            font-family: Consolas, "Courier New", monospace;
+            color: #d14;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Pandas</h1>
+    <p>Pandas is a Python library used for working with data sets. It has functions for analyzing, cleaning, exploring, and manipulating data. Pandas can clean messy data sets.</p>
+
+    <h2>DataFrame</h2>
+    <p>Data sets in Pandas are usually multi-dimensional tables, called DataFrames. Series is like a column, a DataFrame is the whole table.</p>
+    <pre><code>import pandas
+
+# checking the version
+print(pd.__version__)
+
+mydataset = {
+  'cars': ["BMW", "Volvo", "Ford"],
+  'passings': [3, 7, 2]
+}
+# writing in the table format
+myvar = pandas.DataFrame(mydataset)
+
+print(myvar)
+</code></pre>
+
+    <h2>Pandas Series</h2>
+    <p>A Pandas Series is like a column in a table. It is a one-dimensional array holding data of any type.</p>
+    <pre><code>import pandas as pd
+
+a = [1, 7, 2]
+
+myvar = pd.Series(a)
+
+print(myvar)
+
+# Return the first value of the Series
+print(myvar[0])
+</code></pre>
+
+    <h3>Create Labels</h3>
+    <p>With the index argument, you can name your own labels.</p>
+    <pre><code>import pandas as pd
+
+a = [1, 7, 2]
+
+myvar = pd.Series(a, index = ["x", "y", "z"])
+
+print(myvar)
+
+# Access an item by referring to the label
+print(myvar["y"])
+</code></pre>
+
+    <h2>Key/Value Objects as Series</h2>
+    <p>A dictionary is used when creating a Series.</p>
+    <pre><code>import pandas as pd
+
+calories = {"day1": 420, "day2": 380, "day3": 390}
+
+myvar = pd.Series(calories)
+print(myvar)
+# indexes
+myvar1 = pd.Series(calories, index = ["day1", "day2"])
+
+print(myvar1)
+
+# Locate Row 0nly 1st row
+print(df.loc[0])
+
+# Locate the both 1st and 2nd row
+print(df.loc[[0, 1]])
+
+# indexes
+df = pd.DataFrame(data, index = ["day1", "day2", "day3"])
+
+print(df)
+
+# refer to the named index:
+print(df.loc["day2"])
+</code></pre>
+
+    <h2>Load Files Into a DataFrame</h2>
+    <pre><code>import pandas as pd
+
+df = pd.read_csv('data.csv')
+
+print(df)
+</code></pre>
+
+    <h2>Pandas Read CSV</h2>
+    <p>Use to_string() to print the entire DataFrame.</p>
+    <pre><code>import pandas as pd
+
+df = pd.read_csv('data.csv')
+
+print(df.to_string())
+
+# Display Maximum rows
+print(pd.options.display.max_rows)
+</code></pre>
+
+    <h2>Read JSON</h2>
+    <p>Big data sets are often stored, or extracted as JSON.</p>
+    <pre><code>import pandas as pd
+
+df = pd.read_json('data.json')
+
+print(df.to_string())
+</code></pre>
+    <p>Dictionary as JSON</p>
+    <pre><code>import pandas as pd
+
+data = {
+  "Duration":{
+    "0":60,
+    "1":60,
+    "2":60,
+    "3":45,
+    "4":45,
+    "5":60
+  },
+  "Pulse":{
+    "0":110,
+    "1":117,
+    "2":103,
+    "3":109,
+    "4":117,
+    "5":102
+  },
+  "Maxpulse":{
+    "0":130,
+    "1":145,
+    "2":135,
+    "3":175,
+    "4":148,
+    "5":127
+  },
+  "Calories":{
+    "0":409,
+    "1":479,
+    "2":340,
+    "3":282,
+    "4":406,
+    "5":300
+  }
+}
+
+df = pd.DataFrame(data)
+
+print(df)
+</code></pre>
+
+    <h1>Pandas - Analyzing DataFrames</h1>
+
+    <h2>Head</h2>
+    <p>Display the starting 4 rows.</p>
+    <h2>Tail</h2>
+    <p>Display the last 4 values.</p>
+    <pre><code>import pandas as pd
+
+df = pd.read_csv('data.csv')
+
+print(df.head())
+
+# to display first 10 we use
+print(df.head(10))
+
+# to display the last 4 values
+print(df.tail())
+
+# to display last 10 list
+print(df.tail(10))
+</code></pre>
+
+    <h2>Info</h2>
+    <p>This gives you more information about the data set.</p>
+    <pre><code>print(df.info())
+</code></pre>
+
+    <h1>Pandas - Cleaning Data</h1>
+    <p>Data cleaning means fixing bad data in your data set. Bad data could be:</p>
+    <ol>
+        <li>Empty cells</li>
+        <li>Data in wrong format</li>
+        <li>Wrong data</li>
+        <li>Duplicates</li>
+    </ol>
+    <h3>dropna()</h3>
+    <p>The dropna() method returns a new DataFrame, and will not change the original.</p>
+    <pre><code># remove the null value rows
+new_df = df.dropna()
+print(new_df)
+</code></pre>
+    <p>If you want to change the original DataFrame, use the inplace = True argument:</p>
+    <pre><code>df.dropna(inplace = True)
+print(df.to_string())
+</code></pre>
+
+    <h2>Replace Empty Values</h2>
+    <h3>fillna()</h3>
+    <pre><code>df.fillna(130, inplace = True)
+</code></pre>
+
+</body>
+</html>
 
